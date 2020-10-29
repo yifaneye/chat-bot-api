@@ -1,0 +1,41 @@
+swagger: '2.0'
+info:
+  title: 'Chubby chat bot'
+  description: 'This is a rule-based chat bot'
+  version: '1.0.0'
+securityDefinitions:
+  basicAuth:
+    type: basic
+security:
+  - basicAuth: []
+schemes:
+  - https
+host: 'localhost:5000'
+basePath: '/v1'
+paths:
+  /chat:
+    get:
+      operationId: getReply
+      description: Get bot reply
+      parameters:
+        - name: message
+          in: query
+          required: true
+          description: Message to the bot
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            properties:
+              reply:
+                type: string
+                example: 'Hi'
+                description: Reply from the bot
+        '400':
+          description: Bad request
+      tags:
+        - Chat
+      produces:
+        - application/json
