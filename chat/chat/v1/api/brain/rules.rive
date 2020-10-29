@@ -1,0 +1,32 @@
++ hi bot
+- hi user!
+
++ how are you
+- I’m good, how are you?
+
++ where are you from
+- I’m from my country :)
+
++ hi
+- hi
+- hello
+- hey
+- hi, human
+- hello, human
+- hey, human
+- hi, mate
+- hello, mate
+- hey, mate
+- hi, friend
+- hello, friend
+- hey, friend
+
++ my name is *
+- oh hey <star>
+
++ i am (happy|excited|thrilled)
+- I am happy too for you.
+
++ how is the weather in *
+- We have clear sky in <star>
+- We have heavy rain in <star>
