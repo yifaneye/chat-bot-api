@@ -1,3 +1,4 @@
+from http import HTTPStatus
 import requests
 
 from .reply import WeatherReply, RestaurantsReply
@@ -11,6 +12,8 @@ def get_reply(message):
 	url = f'https://api.wit.ai/message?v=20201026&q={message}'
 	headers = {'Authorization': WIT_TOKEN}
 	response = requests.get(url, headers=headers)
+	if response.status_code != HTTPStatus.OK:
+		raise response.raise_for_status()
 	jsonResponse = response.json()
 	try:
 		if jsonResponse['intents'][0]['name'] == "GetWeatherInformation":

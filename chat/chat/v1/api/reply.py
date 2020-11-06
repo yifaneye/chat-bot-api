@@ -1,5 +1,6 @@
 from abc import abstractmethod
 
+from http import HTTPStatus
 import requests
 
 
@@ -16,6 +17,8 @@ class Reply:
     def get_api_json_response(self):
         """Returns the JSON response by making an API call"""
         response = requests.get(self.url, headers=self.headers)
+        if response.status_code != HTTPStatus.OK:
+            raise response.raise_for_status()
         return response.json()
 
     @abstractmethod
