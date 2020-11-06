@@ -1,7 +1,6 @@
 import requests
 
-from .open_weather_map import get_weather
-from .yelp import get_restaurant
+from .reply import WeatherReply, RestaurantsReply
 from .secrets import WIT_TOKEN
 
 DEFAULT_REPLY = "Sorry, I don't understand"
@@ -16,10 +15,10 @@ def get_reply(message):
 	try:
 		if jsonResponse['intents'][0]['name'] == "GetWeatherInformation":
 			location = jsonResponse['entities']['wit$location:location'][0]['resolved']['values'][0]['name']
-			return get_weather(location)
+			return WeatherReply(location).get_reply()
 		elif jsonResponse['intents'][0]['name'] == "FindRestaurant":
 			location = jsonResponse['entities']['wit$location:location'][0]['resolved']['values'][0]['name']
 			query = jsonResponse['entities']['wit$local_search_query:local_search_query'][0]['value']
-			return get_restaurant(query, location)
+			return RestaurantsReply(query, location).get_reply()
 	except:
 		return DEFAULT_REPLY
