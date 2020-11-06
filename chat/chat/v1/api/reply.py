@@ -78,7 +78,11 @@ class RestaurantsReply(Reply):
 
     def process_api_json_response(self):
         jsonResponse = self.get_api_json_response()
-        return [
-            {"name": business["name"], "phone": business["phone"]}
-            for business in jsonResponse['businesses']
-        ]
+        nRestaurants = len(jsonResponse['businesses'])
+        return {
+            "message": f"We have these {nRestaurants} {self.term} in {self.location}",
+            "restaurants": [
+                {"name": business["name"], "phone": business["phone"]}
+                for business in jsonResponse['businesses']
+            ]
+        }
