@@ -7,9 +7,10 @@ from flask import g
 from rivescript import RiveScript
 
 from . import Resource
+from .wit_ai import get_reply
 
 ERROR_MESSAGE = "[ERR: No Reply Matched]"
-DEFAULT_REPLY = "Sorry, I can't understand. Please message me 'hi bot', 'how are you', 'where are you from', 'hi', 'my name is ...', 'i am happy', 'i am excited', 'i am thrilled'."
+DEFAULT_REPLY = "Sorry, I can't understand. Please message me 'hi bot', 'how are you', 'where are you from', 'hi', 'my name is ...', 'i am happy', 'i am excited', 'i am thrilled', 'how is the weather in ...'."
 
 bot = RiveScript()
 bot.load_directory(os.path.join(os.path.dirname(__file__), ".", "brain"))
@@ -24,6 +25,8 @@ class Chat(Resource):
         print(f'You> {message}')
         reply = bot.reply("localuser", message)
         if reply == ERROR_MESSAGE:
-            reply = DEFAULT_REPLY
+            # reply = DEFAULT_REPLY
+            reply = get_reply(message)
+
         print(f'Bot> {reply}')
         return {'reply': reply}, 200, None

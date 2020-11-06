@@ -19,7 +19,7 @@ paths:
       description: Get bot reply
       parameters:
         - name: message
-          in: query
+          in: message
           required: true
           description: Message to the bot
           type: string
@@ -35,6 +35,8 @@ paths:
                 description: Reply from the bot
         '400':
           description: Bad request
+        '500':
+          description: Server Error
       tags:
         - Chat
       produces:
